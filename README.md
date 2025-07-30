@@ -25,15 +25,78 @@ Payments: Records of payments processed for submitted claims, including: payment
 
 Providers: Details about healthcare service providers, including: provider_id, name, speciality, city/state, zip_code, phone
 
+## Insights (Report & Analysis)
+## Understanding Customer Demographics
 #### Some Key Analytical Questions Answered
 
 Patient Demographics & Behaviour: 
 
-- What is the gender distribution of patients?
+-- 1.  What is the demographic composition of our patient base?
+-- Who are our patients, and how are they distributed across age, gender, and insurance type?
+-- Distribution across gender
 
-- What is the age distribution of patients?
 
-- Which cities or states have the highest concentration of patients?
+> There are	*23970* males,	*23970* females and	2060 representing other genders. 
+<details>
+  <summary>View Code</summary>
+ 
+  ```sql
+  select gender, count(gender) as Number
+from patients
+group by gender
+order by number desc;
+  ```
+
+-- Distribution across age
+select
+CASE 
+ When age < 18 then 'Below 18'
+ when age between 18 and 30 then 'Young Adult'
+ when age between 31 and 49 then 'Senior Adult'
+ELSE 'Retirees'
+End as Age_group, count(*) as TNoP
+from patients
+group by age_group
+order by age_group desc;
+
+-- 2. Which cities or states have the highest concentration of patients?
+-- “Where are our patients located geographically?”
+select state, count(*) AS Pop
+from patients
+group by state
+order by pop desc
+limit 5;
+
+-- 3. What is the age and gender breakdown across cities or states?
+-- “Are seniors more concentrated in certain cities or is a city more female-dominant?”
+SELECT 
+  state,
+  gender,
+  CASE 
+    WHEN age < 18 THEN '0-17'
+    WHEN age BETWEEN 18 AND 34 THEN '18-34'
+    WHEN age BETWEEN 35 AND 54 THEN '35-54'
+    WHEN age BETWEEN 55 AND 74 THEN '55-74'
+    ELSE '75+'
+  END AS age_group,
+  COUNT(*) AS patient_count
+FROM patients
+GROUP BY state, gender, age_group
+ORDER BY state, gender, age_group;
+
+-- 4. Are there underserved or low-volume zip codes?
+-- “Where do we have few patients, and possibly poor reach or service?
+select zip_code, count(*) NoPZ
+from patients
+group by zip_code
+order by NoPZ Asc
+Limit 10;
+
+
+
+
+
+
 
 Claims Analysis: 
 
@@ -75,7 +138,6 @@ Provider-Patient Relationship Mapping
 Claim vs Payment Matching
  → Compared claim and payment values to identify over- and underpayments.
 
-# Insights (Report & Analysis)
 
 
 
