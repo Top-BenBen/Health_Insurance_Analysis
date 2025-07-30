@@ -133,17 +133,52 @@ Limit 10;
 </details>
 
 
+#### Claims Analysis: 
+
+5. What is the total claim volume and value over time? How many claims are we processing, and how much do they cost year over year?
+
+> Between the years 2023 and 2025, the data reveals a notable trend in claim volume and value. In 2024, the number of claims peaked at 100,361, resulting in the highest total claim value of approximately $2.59 billion. This marks a significant increase compared to 2023, which recorded 82,234 claims worth about $2.12 billion. However, by 2025, there was a sharp decline, with only 17,405 claims totaling around $449.6 million. This suggests that 2024 experienced the highest healthcare activity or utilization, while 2025 saw a substantial drop-off in both claim frequency and cost. The pattern may indicate a policy change, coverage shift, or behavioral shift in how services were accessed during that period.
+
+> <img width="752" height="452" alt="image" src="https://github.com/user-attachments/assets/a957f11e-e2ca-4cf2-8977-24c20430f44a" />
+
+<details>
+  <summary>View Code</summary>
+ 
+```sql
+Select 
+Date_format(claim_date, '%y-%m') as Claim_months, 
+count(*) as NoC, 
+round(sum(claim_amount),2) as Total_Claim_Value
+from claims
+group by claim_months
+order by Total_Claim_Value;
+```
+</details>
+
+
+6. What’s the average claim amount by status? Are rejected or pending claims costing us more or less?
+
+> Across all claim statuses, a total of 140,566 approved claims recorded the highest volume and the highest average claim value at $26,106.94. In comparison, 19,973 pending claims had an average claim value of $25,087.35, while 39,461 rejected claims averaged slightly lower at $25,034.68. The relatively small variation in average claim value across statuses suggests that claim size alone may not be a primary determinant of approval. However, the significantly higher volume and value in the approved category indicate stronger validation or faster processing for standard claims, yet the lower figures in pending and rejected categories may signal issues with documentation, policy limits, or potential fraud flags.
+
+> <img width="752" height="452" alt="image" src="https://github.com/user-attachments/assets/f28e85f2-3896-4527-aabb-35a570d32a19" />
+
+<details>
+  <summary>View Code</summary>
+ 
+```sql
+select status, 
+COUNT(*) AS NoC,
+ROUND(avg(claim_amount),2) as AvgClaim_Value
+from claims 
+group by status
+order by AvgClaim_Value DESC;
+```
+</details>
 
 
 
 
-Claims Analysis: 
 
-- What is the average claim amount per provider?
-
-- How many claims are submitted per patient on average?
-
-- What is the monthly trend of submitted claims?
 
 Payments Analysis: 
 
