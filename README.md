@@ -195,7 +195,7 @@ order by AvgClaim_Value DESC;
 7. Which providers are submitting the highest-value claims? Who are our most expensive providers — and do they align with quality?
 >The top 5 highest-cost providers collectively billed over $8.8 million. Provider 1868 had the highest average claim cost at $32,891.51, while Provider 1423 had the most claims (64) but a lower average of $27,719.83. All five providers had average claim values above $27,000, signalling potential high-cost service areas that may require closer review or cost-control measures.
 
-> | Provider ID | Claim Count | Total Claim Value (USD) | Average Claim Cost (USD) |
+| Provider ID | Claim Count | Total Claim Value (USD) | Average Claim Cost (USD) |
 | ----------- | ----------- | ----------------------- | ------------------------ |
 | 1868        | 55          | 1,809,032.80            | 32,891.51                |
 | 4195        | 60          | 1,804,410.92            | 30,073.52                |
@@ -222,7 +222,7 @@ Limit 5;
 8. Are there spikes in claim submissions from certain patients or providers? Any behavioural outliers that suggest fraud or errors?”
 >These patients consistently generate high-value claims, with each contributing over $400K. They may warrant further review for patterns, policy compliance, or potential risk management.
 
-> | Patient ID | Claim Count | Total Claim Value (USD) |
+| Patient ID | Claim Count | Total Claim Value (USD) |
 | ---------- | ----------- | ----------------------- |
 | 27071      | 15          | 697,056.93              |
 | 7935       | 13          | 488,940.54              |
@@ -250,32 +250,101 @@ ORDER BY TClaim_Value DESC;
 ```
 </details>
 
--- 9. What is the average time between claims per patient or provider?
--- “How frequently do patients/providers submit claims?”
-WITH patient_claims AS (
-  SELECT 
-    patient_id,
-    claim_date,
-    LAG(claim_date) OVER (PARTITION BY patient_id ORDER BY claim_date) AS prev_date
-  FROM claims
-)
+#### Payments Analysis: 
+
+What is the overall claim reimbursement rate?
+> The reimbursement rate of 0.8998 (or approximately 89.98%) signifies that nearly 90% of the claimed amount is successfully reimbursed by the provider network. This is a strong indicator of efficient claims processing and high payment reliability within the system.
+
+> | Metric             | Value  |
+|--------------------|--------|
+| Reimbursement Rate | 0.8998 | 
+
+<details>
+  <summary>View Code</summary>
+ 
+```sql
+select round(sum(payment_amount),2)/ round(sum(claim_amount),2) as reimbursement_rate
+from payments;
+```
+</details>
+
+11. How long does it typically take to get paid after a claim is submitted?
+>An average wait period of 0.6647 (in days) suggests that, on average, claims or payments are being processed with a turnaround of just under 0.67 days. This quick turnaround highlights operational efficiency in processing claims, contributing to higher customer satisfaction and faster cash flow cycles.
+
+>| Metric             | Value   |
+|--------------------|---------|
+| Average Wait Period | 0.6647  | 
+
+<details>
+  <summary>View Code</summary>
+ 
+ ```sql
+ select avg(datediff(payment_date, claim_date)) as avg_Wait_period
+from payments
+WHERE payment_date IS NOT NULL AND claim_date IS NOT NULL;
+ ```
+ </details>
+
+Which claims have the largest payment shortfalls?
+> This shows a consistent payment shortfall of around 9,870 to 9,960 units per claim, roughly 20% less than the original claim amounts, indicating potential partial payments or claim denials due to policy or error factors. This highlights a critical area for investigation to distinguish between legitimate adjustments and avoidable disputes, presenting an opportunity to enhance provider relations and streamline reimbursement processes.
+
+> | claim_id | patient_id | claim_amount | payment_amount | shortfall |
+|----------|------------|--------------|----------------|-----------|
+| 156468   | 17087      | 49842        | 39882          | 9960      |
+| 49282    | 18262      | 49951        | 40017          | 9934      |
+| 193794   | 1719       | 49758        | 39825          | 9933      |
+| 82768    | 23264      | 49765        | 39846          | 9919      |
+| 127275   | 11444      | 49972        | 40061          | 9911      |
+| 147190   | 38000      | 49946        | 40046          | 9900      |
+| 31577    | 4545       | 49705        | 39809          | 9896      |
+| 57942    | 24719      | 49601        | 39709          | 9892      |
+| 169799   | 33120      | 49593        | 39704          | 9889      |
+| 91429    | 24220      | 49446        | 39560          | 9886      |
+| 160702   | 37743      | 49655        | 39777          | 9878      |
+| 175264   | 19033      | 49817        | 39940          | 9877      |
+| 10460    | 4638       | 49417        | 39544          | 9873      |
+| 100692   | 44302      | 49980        | 40108          | 9872      |
+| 169835   | 2648       | 49907        | 40037          | 9870      |
+
+
+<details>
+  <summary>View Code</summary>
+ 
+```sql
 SELECT 
+  claim_id,
   patient_id,
-  AVG(DATEDIFF(claim_date, prev_date)) AS avg_days_between_claims
-FROM patient_claims
-WHERE prev_date IS NOT NULL
-GROUP BY patient_id
-ORDER BY avg_days_between_claims desc;
+  claim_amount,
+  payment_amount,
+  (claim_amount - payment_amount) AS shortfall
+FROM payments
+WHERE payment_amount < claim_amount
+ORDER BY shortfall DESC
+LIMIT 15;
+```
+</details>
 
+-- 13. How does the reimbursement rate vary by claim status?
+select status,
+count(*) as NoC,
+sum(claim_amount) as total_claim,
+sum(payment_amount),
+round(sum(payment_amount),2)/ round(sum(claim_amount),2) as reimbursement_rate
+from payments
+group by status
+order by reimbursement_rate Desc ;
 
+-- 14. Which providers are consistently reimbursed below the claim value?
+select provider_id, 
+count(*) as Noc,
+sum(claim_amount) as total_claim,
+sum(payment_amount) as total_payment,
+round(payment_amount - claim_amount) as payment_gap
+from payments
+group by provider_id, payment_gap
+having payment_gap < 0
+order by payment_gap desc;
 
-Payments Analysis: 
-
-- What is the average payment amount per provider?
-
-- What is the time lag between claim and payment?
-
-- What percentage of claims were paid in full?
 
 Provider Insights: 
 
