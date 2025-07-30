@@ -1,4 +1,4 @@
-<img width="1024" height="1024" alt="Health Insurance Project Banner" src="https://github.com/user-attachments/assets/8052a9ac-daff-4ad7-9c5e-b4e7129970ed" />
+<img width="980" height="720" alt="Health Insurance Project Banner" src="https://github.com/user-attachments/assets/8052a9ac-daff-4ad7-9c5e-b4e7129970ed" />
 
 # Healthcare Analytics Project Documentation
 
