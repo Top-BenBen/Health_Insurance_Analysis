@@ -42,7 +42,7 @@ These datasets are assumed to be joined via appropriate primary/foreign keys (e.
 * Unpaid or underpaid claims
 * High-cost services and their frequency
 
-#### ⚠️ 3. **Fraud Indicators**
+#### 3. **Fraud Indicators**
 
 * Duplicate claim entries (same date, patient, provider)
 * Payments exceeding expected limits
@@ -59,14 +59,14 @@ Each fraud detection query is built using logical rules, but thresholds can be a
 
 * Despite a stable 90% reimbursement rate overall, repeated shortfalls of nearly 9,900 units per high-value claim suggest systemic underpayments that merit closer investigation.
 
-### 🧠 Tools Used
+### Tools Used
 
 * **SQL Workbench** for query execution
 * **Relational Schema** of 4 interlinked tables
 * Data cleaning, filtering, and joins performed entirely in SQL
 * MS Excel (Visuals)
 
-### 🧭 Next Steps
+### Next Steps
   
 * Integrate a **dashboard layer** using Power BI, Excel, or Python
 
@@ -80,12 +80,12 @@ This project demonstrates how structured SQL analysis can uncover powerful opera
 
  
 ## Insights (Report & Analysis)
-## Understanding Customer Demographics
+
 #### Some Key Analytical Questions Answered
 
 Patient Demographics & Behaviour: 
 
- What is the demographic composition of our patient base? Who are our patients, and how are they distributed across age, gender, and insurance type?
+What is the demographic composition of our patient base? Who are our patients, and how are they distributed across age, gender, and insurance type?
 Distribution across gender
 
 > There are	*23970* males,	*23970* females and	*2060* representing other genders. 
