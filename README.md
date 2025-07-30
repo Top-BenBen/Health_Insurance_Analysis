@@ -46,13 +46,9 @@ from patients
 group by gender
 order by number desc;
   ```
--- Distribution across age
->
-
 <details>
-  <summary>View Code</summary>
  
- ```sql
+-- Distribution across age 
 select
 CASE 
  When age < 18 then 'Below 18'
@@ -63,20 +59,11 @@ End as Age_group, count(*) as TNoP
 from patients
 group by age_group
 order by age_group desc;
-```
 
--- 2. Which cities or states have the highest concentration of patients?
--- “Where are our patients located geographically?”
+2. Which cities or states have the highest concentration of patients?
+   “Where are our patients located geographically?”
 
 > Washington leads with the highest patient population, indicating a potential cluster of healthcare engagement or service demand in that state.
-
-``` sql
-select state, count(*) AS Pop
-from patients
-group by state
-order by pop desc
-limit 5;
-```
 
 | state          | Pop          |
 |----------------|--------------|
@@ -86,10 +73,25 @@ limit 5;
 | Pennsylvania   | 1041         |
 | Missouri       | 1039         |
 
+<details>
+  <summary>View Code</summary>
+``` sql
+select state, count(*) AS Pop
+from patients
+group by state
+order by pop desc
+limit 5;
+```
+<details>
 
 -- 3. What is the age and gender breakdown across cities or states?
 -- “Are seniors more concentrated in certain cities or is a city more female-dominant?”
-SELECT 
+
+<details>
+  <summary>View Code</summary>
+
+ ``` SQL
+ SELECT 
   state,
   gender,
   CASE 
@@ -103,7 +105,8 @@ SELECT
 FROM patients
 GROUP BY state, gender, age_group
 ORDER BY state, gender, age_group;
-
+```
+<details>
 -- 4. Are there underserved or low-volume zip codes?
 -- “Where do we have few patients, and possibly poor reach or service?
 select zip_code, count(*) NoPZ
