@@ -1,12 +1,11 @@
-<img width="560" height="560" alt="Health Insurance Project Banner" src="https://github.com/user-attachments/assets/8052a9ac-daff-4ad7-9c5e-b4e7129970ed" />
-
 # Healthcare Analytics Project Documentation
 
 #### Title: Data-Driven Insights for Healthcare Utilisation & Fraud Detection
 
- Industry: Health Insurance | Data Analytics
- 
- Tools Used: SQL Workbench | Relational Database
+<img width="560" height="560" alt="Health Insurance Project Banner" src="https://github.com/user-attachments/assets/8052a9ac-daff-4ad7-9c5e-b4e7129970ed" />
+
+Industry: Health Insurance | Data Analytics
+Tools Used: SQL Workbench | Relational Database
  
 #### 1. Project Overview
 This project explores health insurance datasets to uncover patterns in patient behaviour, provider practices, claim efficiency, and potential fraud. The analysis is grounded in transactional data captured across four key tables: patients, claims, payments, and providers.
