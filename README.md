@@ -139,7 +139,7 @@ Limit 10;
 
 > Between the years 2023 and 2025, the data reveals a notable trend in claim volume and value. In 2024, the number of claims peaked at 100,361, resulting in the highest total claim value of approximately $2.59 billion. This marks a significant increase compared to 2023, which recorded 82,234 claims worth about $2.12 billion. However, by 2025, there was a sharp decline, with only 17,405 claims totaling around $449.6 million. This suggests that 2024 experienced the highest healthcare activity or utilization, while 2025 saw a substantial drop-off in both claim frequency and cost. The pattern may indicate a policy change, coverage shift, or behavioral shift in how services were accessed during that period.
 
-> | provider_id | claim_count | TClaim_Value | AvgCCost  |
+| provider_id | claim_count | TClaim_Value | AvgCCost  |
 |-------------|-------------|--------------|-----------|
 | 1868        | 55          | 1809032.8    | 32891.51  |
 | 4195        | 60          | 1804410.92   | 30073.52  |
