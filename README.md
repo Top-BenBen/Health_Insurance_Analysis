@@ -255,7 +255,7 @@ ORDER BY TClaim_Value DESC;
 What is the overall claim reimbursement rate?
 > The reimbursement rate of 0.8998 (or approximately 89.98%) signifies that nearly 90% of the claimed amount is successfully reimbursed by the provider network. This is a strong indicator of efficient claims processing and high payment reliability within the system.
 
-> | Metric             | Value  |
+> | Metric             | Value|
 |--------------------|--------|
 | Reimbursement Rate | 0.8998 | 
 
@@ -268,7 +268,7 @@ from payments;
 ```
 </details>
 
-11. How long does it typically take to get paid after a claim is submitted?
+How long does it typically take to get paid after a claim is submitted?
 >An average wait period of 0.6647 (in days) suggests that, on average, claims or payments are being processed with a turnaround of just under 0.67 days. This quick turnaround highlights operational efficiency in processing claims, contributing to higher customer satisfaction and faster cash flow cycles.
 
 >| Metric             | Value   |
@@ -288,7 +288,7 @@ WHERE payment_date IS NOT NULL AND claim_date IS NOT NULL;
 Which claims have the largest payment shortfalls?
 > This shows a consistent payment shortfall of around 9,870 to 9,960 units per claim, roughly 20% less than the original claim amounts, indicating potential partial payments or claim denials due to policy or error factors. This highlights a critical area for investigation to distinguish between legitimate adjustments and avoidable disputes, presenting an opportunity to enhance provider relations and streamline reimbursement processes.
 
-> | claim_id | patient_id | claim_amount | payment_amount | shortfall |
+| claim_id | patient_id | claim_amount | payment_amount | shortfall |
 |----------|------------|--------------|----------------|-----------|
 | 156468   | 17087      | 49842        | 39882          | 9960      |
 | 49282    | 18262      | 49951        | 40017          | 9934      |
@@ -347,29 +347,3 @@ order by payment_gap desc;
 
 
 Provider Insights: 
-
-- Which specialities submit the most claims?
-
-- Which states or cities have the most active providers?
-
-- Are there providers serving patients from multiple states?
-
-Fraud & Behavioural Patterns: 
-
-- Are there providers who submit many high-value claims in short timeframes?
-
-- Are there any patients with consistent full payments received within one day?
-
-- Do any patients have significantly higher claim frequencies than average?
-
-#### Join-Based Relationship Analysis
-
-Provider-Patient Relationship Mapping
- → Tracked patient loyalty by counting distinct patients per provider.
-
-Claim vs Payment Matching
- → Compared claim and payment values to identify over- and underpayments.
-
-
-
-
