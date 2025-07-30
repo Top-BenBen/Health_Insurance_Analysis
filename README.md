@@ -48,6 +48,7 @@ order by number desc;
   ```
 
 -- Distribution across age
+```sql
 select
 CASE 
  When age < 18 then 'Below 18'
@@ -58,8 +59,8 @@ End as Age_group, count(*) as TNoP
 from patients
 group by age_group
 order by age_group desc;
-
--- 2. Which cities or states have the highest concentration of patients?
+```
+``` -- 2. Which cities or states have the highest concentration of patients?
 -- “Where are our patients located geographically?”
 select state, count(*) AS Pop
 from patients
