@@ -5,6 +5,7 @@
 <img width="560" height="560" alt="Health Insurance Project Banner" src="https://github.com/user-attachments/assets/8052a9ac-daff-4ad7-9c5e-b4e7129970ed" />
 
 Industry: Health Insurance | Data Analytics
+
 Tools Used: SQL Workbench | Relational Database
  
 #### 1. Project Overview
