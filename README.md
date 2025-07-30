@@ -1,8 +1,4 @@
-# Healthcare Analytics Project Documentation
-
-#### Title: Data-Driven Insights for Healthcare Utilisation & Fraud Detection
-
-<img width="560" height="560" alt="Health Insurance Project Banner" src="https://github.com/user-attachments/assets/8052a9ac-daff-4ad7-9c5e-b4e7129970ed" />
+# Healthcare Analytics Project Documentation & Insights (Report & Analysis)
 
 Industry: Health Insurance | Data Analytics
 
@@ -10,7 +6,6 @@ Tools Used: SQL Workbench | Relational Database
  
 #### 1. Project Overview
 This project explores health insurance datasets to uncover patterns in patient behaviour, provider practices, claim efficiency, and potential fraud. The analysis is grounded in transactional data captured across four key tables: patients, claims, payments, and providers.
-
 
 #### Dataset Source, Architecture & Summary
 The source of the dataset: The dataset was downloaded from ['Kaggle'](https://www.kaggle.com/datasets/jaiswalmagic1/healthcare-fraud-detection-dataset1)
@@ -80,20 +75,7 @@ Provider-Patient Relationship Mapping
 Claim vs Payment Matching
  → Compared claim and payment values to identify over- and underpayments.
 
+# Insights (Report & Analysis)
 
-#### Summary & Recommendations
-Findings:
 
-The majority of patients are concentrated in major cities with younger age brackets.
 
-Most claims are approved, but payment timelines vary widely.
-
-A few providers and patients display unusual behaviour — possible fraud signals.
-
-#### Recommendations:
-
-Build real-time monitoring dashboards for claim/payment lag.
-
-Trigger automated fraud alerts for high-value, same-day payment claims.
-
-Cross-analyse with treatment or diagnosis data in future iterations.
