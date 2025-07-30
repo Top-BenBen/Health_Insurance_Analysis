@@ -46,7 +46,7 @@ from patients
 group by gender
 order by number desc;
   ```
-<details>
+</details>
  
 -- Distribution across age 
 select
@@ -75,6 +75,7 @@ order by age_group desc;
 
 <details>
   <summary>View Code</summary>
+ 
 ``` sql
 select state, count(*) AS Pop
 from patients
@@ -82,7 +83,7 @@ group by state
 order by pop desc
 limit 5;
 ```
-<details>
+</details>
 
 -- 3. What is the age and gender breakdown across cities or states?
 -- “Are seniors more concentrated in certain cities or is a city more female-dominant?”
@@ -106,7 +107,8 @@ FROM patients
 GROUP BY state, gender, age_group
 ORDER BY state, gender, age_group;
 ```
-<details>
+</details>
+
 -- 4. Are there underserved or low-volume zip codes?
 -- “Where do we have few patients, and possibly poor reach or service?
 select zip_code, count(*) NoPZ
