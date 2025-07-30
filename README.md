@@ -63,8 +63,10 @@ from patients
 group by age_group
 order by age_group desc;
 ```
+
 -- 2. Which cities or states have the highest concentration of patients?
 -- “Where are our patients located geographically?”
+
 > Washington leads with the highest patient population, indicating a potential cluster of healthcare engagement or service demand in that state.
 
 ``` sql
