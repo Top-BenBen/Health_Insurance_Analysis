@@ -36,7 +36,7 @@ Patient Demographics & Behaviour:
 -- Distribution across gender
 
 
-> There are	*23970* males,	*23970* females and	2060 representing other genders. 
+> There are	*23970* males,	*23970* females and	*2060* representing other genders. 
 <details>
   <summary>View Code</summary>
  
@@ -46,9 +46,12 @@ from patients
 group by gender
 order by number desc;
   ```
-
 -- Distribution across age
-```sql
+>
+<details>
+  <summary>View Code</summary>
+ 
+ ```sql
 select
 CASE 
  When age < 18 then 'Below 18'
@@ -60,13 +63,26 @@ from patients
 group by age_group
 order by age_group desc;
 ```
-``` -- 2. Which cities or states have the highest concentration of patients?
+-- 2. Which cities or states have the highest concentration of patients?
 -- “Where are our patients located geographically?”
+> Washington leads with the highest patient population, indicating a potential cluster of healthcare engagement or service demand in that state.
+
+``` sql
 select state, count(*) AS Pop
 from patients
 group by state
 order by pop desc
 limit 5;
+```
+
+| state          | Pop          |
+|----------------|--------------|
+| Washington     | 1063         |
+| Kansas         | 1053         |
+| Oklahoma       | 1054         |
+| Pennsylvania   | 1041         |
+| Missouri       | 1039         |
+
 
 -- 3. What is the age and gender breakdown across cities or states?
 -- “Are seniors more concentrated in certain cities or is a city more female-dominant?”
