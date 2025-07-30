@@ -139,6 +139,15 @@ Limit 10;
 
 > Between the years 2023 and 2025, the data reveals a notable trend in claim volume and value. In 2024, the number of claims peaked at 100,361, resulting in the highest total claim value of approximately $2.59 billion. This marks a significant increase compared to 2023, which recorded 82,234 claims worth about $2.12 billion. However, by 2025, there was a sharp decline, with only 17,405 claims totaling around $449.6 million. This suggests that 2024 experienced the highest healthcare activity or utilization, while 2025 saw a substantial drop-off in both claim frequency and cost. The pattern may indicate a policy change, coverage shift, or behavioral shift in how services were accessed during that period.
 
+> | provider_id | claim_count | TClaim_Value | AvgCCost  |
+|-------------|-------------|--------------|-----------|
+| 1868        | 55          | 1809032.8    | 32891.51  |
+| 4195        | 60          | 1804410.92   | 30073.52  |
+| 1423        | 64          | 1774069      | 27719.83  |
+| 4179        | 59          | 1738137.93   | 29459.96  |
+| 950         | 59          | 1706995.12   | 28932.12  |
+
+
 > <img width="752" height="452" alt="image" src="https://github.com/user-attachments/assets/a957f11e-e2ca-4cf2-8977-24c20430f44a" />
 
 <details>
@@ -160,6 +169,13 @@ order by Total_Claim_Value;
 
 > Across all claim statuses, a total of 140,566 approved claims recorded the highest volume and the highest average claim value at $26,106.94. In comparison, 19,973 pending claims had an average claim value of $25,087.35, while 39,461 rejected claims averaged slightly lower at $25,034.68. The relatively small variation in average claim value across statuses suggests that claim size alone may not be a primary determinant of approval. However, the significantly higher volume and value in the approved category indicate stronger validation or faster processing for standard claims, yet the lower figures in pending and rejected categories may signal issues with documentation, policy limits, or potential fraud flags.
 
+> | Status   | No. of Claims | Avg. Claim Value (USD) |
+| -------- | ------------- | ---------------------- |
+| Approved | 140,566       | 26,106.94              |
+| Pending  | 19,973        | 25,087.35              |
+| Rejected | 39,461        | 25,034.68              |
+
+
 > <img width="752" height="452" alt="image" src="https://github.com/user-attachments/assets/f28e85f2-3896-4527-aabb-35a570d32a19" />
 
 <details>
@@ -176,7 +192,80 @@ order by AvgClaim_Value DESC;
 </details>
 
 
+7. Which providers are submitting the highest-value claims? Who are our most expensive providers — and do they align with quality?
+>The top 5 highest-cost providers collectively billed over $8.8 million. Provider 1868 had the highest average claim cost at $32,891.51, while Provider 1423 had the most claims (64) but a lower average of $27,719.83. All five providers had average claim values above $27,000, signalling potential high-cost service areas that may require closer review or cost-control measures.
 
+> | Provider ID | Claim Count | Total Claim Value (USD) | Average Claim Cost (USD) |
+| ----------- | ----------- | ----------------------- | ------------------------ |
+| 1868        | 55          | 1,809,032.80            | 32,891.51                |
+| 4195        | 60          | 1,804,410.92            | 30,073.52                |
+| 1423        | 64          | 1,774,069.00            | 27,719.83                |
+| 4179        | 59          | 1,738,137.93            | 29,459.96                |
+| 950         | 59          | 1,706,995.12            | 28,932.12                |
+
+
+<details>
+  <summary>View Code</summary>
+ 
+```sql
+Select provider_id, 
+count(*) as claim_count,
+round(sum(claim_amount), 2) as TClaim_Value,
+round((round(sum(claim_amount), 2)/ COUNT(Provider_id)),2) as AvgCCost
+from claims
+group by provider_id
+order by TClaim_Value Desc
+Limit 5;
+```
+</details>
+
+8. Are there spikes in claim submissions from certain patients or providers? Any behavioural outliers that suggest fraud or errors?”
+>These patients consistently generate high-value claims, with each contributing over $400K. They may warrant further review for patterns, policy compliance, or potential risk management.
+
+> | Patient ID | Claim Count | Total Claim Value (USD) |
+| ---------- | ----------- | ----------------------- |
+| 27071      | 15          | 697,056.93              |
+| 7935       | 13          | 488,940.54              |
+| 47318      | 15          | 469,451.00              |
+| 37699      | 14          | 460,587.00              |
+| 28425      | 11          | 434,163.94              |
+| 20801      | 11          | 425,717.65              |
+| 43209      | 13          | 419,157.00              |
+| 48192      | 11          | 416,387.38              |
+| 43126      | 12          | 407,117.22              |
+| 11552      | 14          | 406,950.00              |
+
+<details>
+  <summary>View Code</summary>
+ 
+```sql
+SELECT 
+  patient_id,
+  COUNT(*) AS claim_count,
+  round(SUM(claim_amount),2) AS TClaim_Value
+FROM claims
+GROUP BY patient_id
+HAVING claim_count > 10
+ORDER BY TClaim_Value DESC;
+```
+</details>
+
+-- 9. What is the average time between claims per patient or provider?
+-- “How frequently do patients/providers submit claims?”
+WITH patient_claims AS (
+  SELECT 
+    patient_id,
+    claim_date,
+    LAG(claim_date) OVER (PARTITION BY patient_id ORDER BY claim_date) AS prev_date
+  FROM claims
+)
+SELECT 
+  patient_id,
+  AVG(DATEDIFF(claim_date, prev_date)) AS avg_days_between_claims
+FROM patient_claims
+WHERE prev_date IS NOT NULL
+GROUP BY patient_id
+ORDER BY avg_days_between_claims desc;
 
 
 
