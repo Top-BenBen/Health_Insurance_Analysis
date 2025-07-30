@@ -1,3 +1,4 @@
+<img width="1024" height="1024" alt="Health Insurance Project Banner" src="https://github.com/user-attachments/assets/8052a9ac-daff-4ad7-9c5e-b4e7129970ed" />
 
 # Healthcare Analytics Project Documentation
 
@@ -11,8 +12,13 @@
 This project explores health insurance datasets to uncover patterns in patient behaviour, provider practices, claim efficiency, and potential fraud. The analysis is grounded in transactional data captured across four key tables: patients, claims, payments, and providers.
 
 
-#### Dataset Source & Summary
+#### Dataset Source, Architecture & Summary
 The source of the dataset: The dataset was downloaded from Kaggle[`https://www.kaggle.com/datasets/jaiswalmagic1/healthcare-fraud-detection-dataset1`]
+
+Data Architecture (Entity Relationship Diagram)
+
+The following diagram represents the relational structure across the key tables: Patients, Claims, Payments, and Providers. It highlights how foreign keys are used to link patient activity, provider details, and financial transactions for end-to-end traceability.
+<img width="867" height="560" alt="ERD D" src="https://github.com/user-attachments/assets/e9ce5637-be3f-4658-ba5f-3a20e9997bbb" />
 
 Summary: 
 
