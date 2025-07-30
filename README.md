@@ -169,7 +169,7 @@ order by Total_Claim_Value;
 
 > Across all claim statuses, a total of 140,566 approved claims recorded the highest volume and the highest average claim value at $26,106.94. In comparison, 19,973 pending claims had an average claim value of $25,087.35, while 39,461 rejected claims averaged slightly lower at $25,034.68. The relatively small variation in average claim value across statuses suggests that claim size alone may not be a primary determinant of approval. However, the significantly higher volume and value in the approved category indicate stronger validation or faster processing for standard claims, yet the lower figures in pending and rejected categories may signal issues with documentation, policy limits, or potential fraud flags.
 
-> | Status   | No. of Claims | Avg. Claim Value (USD) |
+| Status   | No. of Claims | Avg. Claim Value (USD) |
 | -------- | ------------- | ---------------------- |
 | Approved | 140,566       | 26,106.94              |
 | Pending  | 19,973        | 25,087.35              |
