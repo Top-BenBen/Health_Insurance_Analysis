@@ -1,4 +1,4 @@
-<img width="980" height="720" alt="Health Insurance Project Banner" src="https://github.com/user-attachments/assets/8052a9ac-daff-4ad7-9c5e-b4e7129970ed" />
+<img width="560" height="560" alt="Health Insurance Project Banner" src="https://github.com/user-attachments/assets/8052a9ac-daff-4ad7-9c5e-b4e7129970ed" />
 
 # Healthcare Analytics Project Documentation
 
@@ -18,7 +18,7 @@ The source of the dataset: The dataset was downloaded from Kaggle[`https://www.k
 Data Architecture (Entity Relationship Diagram)
 
 The following diagram represents the relational structure across the key tables: Patients, Claims, Payments, and Providers. It highlights how foreign keys are used to link patient activity, provider details, and financial transactions for end-to-end traceability.
-<img width="867" height="560" alt="ERD D" src="https://github.com/user-attachments/assets/e9ce5637-be3f-4658-ba5f-3a20e9997bbb" />
+<img width="560" height="560" alt="ERD D" src="https://github.com/user-attachments/assets/e9ce5637-be3f-4658-ba5f-3a20e9997bbb" />
 
 Summary: 
 
