@@ -1,30 +1,84 @@
-# Healthcare Analytics Project Documentation & Insights (Report & Analysis)
+## Health Insurance Data Analysis
+
+**A SQL-Powered Exploration of Utilisation, Payments, and Fraud Indicators**
 
 Industry: Health Insurance | Data Analytics
 
 Tools Used: SQL Workbench | Relational Database
+
+### Project Overview
+
+This project analyses health insurance data across four key entities: **patients, providers, claims, and payments**. The primary goal is to derive insights that help:
+
+* Optimise healthcare operations
+* Understand patient and provider behaviour
+* Detect possible fraudulent or anomalous billing activities
+
+All analyses were conducted using structured SQL queries, focusing on real-world patterns that could impact cost control, service delivery, and risk mitigation in the healthcare system.
+
+### Datasets Used
+
+* `Patients`: Demographic and geographic patient data
+* `Providers`: Facility-level information
+* `Claims`: Details of services rendered
+* `Payments`: Financial information tied to claims
+
+<img width="867" height="560" alt="ERD D" src="https://github.com/user-attachments/assets/3139d5c9-d06a-4b7d-a07e-de818cf8c778" />
+
+
+These datasets are assumed to be joined via appropriate primary/foreign keys (e.g., `PatientID`, `ProviderID`, `ClaimID`).
+
+### Key Areas of Analysis
+
+#### 1. **Utilisation Patterns**
+
+* Number of claims per patient and provider
+* High-frequency users (patients with excessive claims)
+* Distribution of services by state or region
+
+#### 2. **Financial Behaviour**
+
+* Average payment amounts per provider
+* Unpaid or underpaid claims
+* High-cost services and their frequency
+
+#### ⚠️ 3. **Fraud Indicators**
+
+* Duplicate claim entries (same date, patient, provider)
+* Payments exceeding expected limits
+* Providers with unusual billing frequencies
+* Geographic mismatches (e.g., provider and patient in different regions)
+
+Each fraud detection query is built using logical rules, but thresholds can be adjusted based on policy or real-world norms.
+
+### Some Insights (based on SQL output)
+
+*Over half (52%) of all patients are retirees aged 50+, underscoring a healthcare demand skewed toward older populations.
+
+*Some patients submitted claims to multiple providers within tight 10–20 day windows, and others received services across 10+ states. These patterns may indicate complex treatment paths or suggest fragmentation or fraud risk, which needs further investigation.
+
+* Despite a stable 90% reimbursement rate overall, repeated shortfalls of nearly 9,900 units per high-value claim suggest systemic underpayments that merit closer investigation.
+
+### 🧠 Tools Used
+
+* **SQL Workbench** for query execution
+* **Relational Schema** of 4 interlinked tables
+* Data cleaning, filtering, and joins performed entirely in SQL
+* MS Excel (Visuals)
+
+### 🧭 Next Steps
+  
+* Integrate a **dashboard layer** using Power BI, Excel, or Python
+
+* Apply **anomaly detection algorithms** for enhanced fraud scoring
+  
+* Include **time-based trends** to identify seasonal or monthly patterns
+
+### Conclusion
+
+This project demonstrates how structured SQL analysis can uncover powerful operational and financial insights in healthcare data. From utilisation trends to fraud detection, the structured approach offers transparency and scalability, supporting smarter decision-making in the health insurance ecosystem.
+
  
-#### 1. Project Overview
-This project explores health insurance datasets to uncover patterns in patient behaviour, provider practices, claim efficiency, and potential fraud. The analysis is grounded in transactional data captured across four key tables: patients, claims, payments, and providers.
-
-#### Dataset Source, Architecture & Summary
-The source of the dataset: The dataset was downloaded from [`Kaggle`](https://www.kaggle.com/datasets/jaiswalmagic1/healthcare-fraud-detection-dataset1)
-
-Data Architecture (Entity Relationship Diagram)
-
-The following diagram represents the relational structure across the key tables: Patients, Claims, Payments, and Providers. It highlights how foreign keys are used to link patient activity, provider details, and financial transactions for end-to-end traceability.
-<img width="560" height="560" alt="ERD D" src="https://github.com/user-attachments/assets/e9ce5637-be3f-4658-ba5f-3a20e9997bbb" />
-
-Summary: 
-
-Patients: Demographics of insured individuals included the following columns: patient_id, age, gender, city/state
-
-Claims: Submitted healthcare claims containing transactional records, including: claim_id, patient_id, provider_id, claim_date, claim_amount, status
-
-Payments: Records of payments processed for submitted claims, including: payment_id, claim_id, patient_id, provider_id, claim_date, payment_date, claim_amount, payment_amount, status
-
-Providers: Details about healthcare service providers, including: provider_id, name, speciality, city/state, zip_code, phone
-
 ## Insights (Report & Analysis)
 ## Understanding Customer Demographics
 #### Some Key Analytical Questions Answered
@@ -56,7 +110,6 @@ Notably, there are no patients below 18 years in the dataset, which might reflec
 | Young Adult  | 9,120                           | 17.1%                            |
 | Senior Adult | 13,294                          | 24.9%                            |
 | Retirees     | 27,586                          | 51.7%                            |
-| **Total**    | **50,000** (approx.)            | **100%**                         |
 
 <img width="752" height="452" alt="image" src="https://github.com/user-attachments/assets/bb332357-3189-45e1-a285-f74a8b0f6a6f" />
 
@@ -228,9 +281,6 @@ What is the age and gender breakdown across cities or states? Are seniors more c
 | Georgia     | Other   | 55-74     | 5             |
 | Georgia     | Other   | 75+       | 8             |
 | Hawaii      | Female  | 18-34     | 
-
-
-
 
 <details>
   <summary>View Code</summary>
