@@ -1,4 +1,4 @@
-## Health Insurance Data Analysis
+## Health Insurance Data Analysis - SQL PROJECT
 
 **A SQL-Powered Exploration of Utilisation, Payments, and Fraud Indicators**
 
